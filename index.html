@@ -5,267 +5,403 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="InfraGuard Pro - Backup Gerenciado, Disaster Recovery e Migração Segura para a Nuvem">
   <title>InfraGuard Pro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Fontes e ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
-      --cor-primaria: #002b5e;
-      --cor-secundaria: #f8f9fa;
-      --cor-destaque: #0066cc;
-      --cor-clara: #ffffff;
-      --cor-alternada: #dee3ea;
-      --cor-escura: #e1e5ec;
-      --cor-texto: #121212;
-      --fonte-principal: 'Roboto', sans-serif;
+      --cor-principal: #111;
+      --cor-secundaria: #f5f5f5;
+      --cor-destaque: #0d6efd;
+      --cor-clara: #f5f5f5;
+      --cor-escura: #1a1a1a;
+      --cor-texto-claro: #fff;
+      --cor-texto-escuro: #333;
+      --fonte-principal: 'Poppins', sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: var(--fonte-principal); background-color: var(--cor-secundaria); color: var(--cor-texto); line-height: 1.6; }
-    header {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d1') center/cover no-repeat;
-      color: white;
-      padding: 100px 20px;
-      text-align: center;
-    }
-    header h1 { font-size: 2.5rem; margin-bottom: 20px; }
-    header p { font-size: 1.2rem; margin-bottom: 30px; }
-    .btn {
-      display: inline-block;
-      margin: 10px;
-      padding: 15px 25px;
-      border-radius: 30px;
-      border: none;
-      background-color: var(--cor-primaria);
-      color: white;
-      cursor: pointer;
-      transition: 0.3s;
-      text-decoration: none;
-    }
-    .btn:hover { background-color: var(--cor-destaque); }
+    body { font-family: var(--fonte-principal); background-color: var(--cor-clara); color: var(--cor-texto-escuro); line-height: 1.6; }
+
+    /* Navegação */
     nav {
-      background: var(--cor-primaria);
-      padding: 10px 20px;
-      text-align: center;
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
       z-index: 1000;
+      transition: background 0.3s ease;
+      background: transparent;
     }
-    nav a {
-      color: white;
-      margin: 0 15px;
+    nav.scrolled {
+      background: var(--cor-escura);
+    }
+    nav .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--cor-texto-claro);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin-left: 30px;
+    }
+    nav ul li a {
+      color: var(--cor-texto-claro);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 500;
+      transition: color 0.3s;
     }
-    nav a:hover { text-decoration: underline; }
+    nav ul li a:hover {
+      color: var(--cor-destaque);
+    }
+
+    /* Seção Hero */
+    .hero {
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d1?auto=format&fit=crop&w=1650&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+    }
+    .hero .content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--cor-texto-claro);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: var(--cor-texto-claro);
+    }
+    .hero .btn {
+      background: var(--cor-destaque);
+      color: var(--cor-texto-claro);
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+      margin: 0 10px;
+    }
+    .hero .btn:hover {
+      background: #0b5ed7;
+    }
+
+    /* Seções gerais */
     section {
-      padding: 60px 20px;
+      padding: 80px 20px;
       max-width: 1200px;
       margin: auto;
     }
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-      color: var(--cor-primaria);
-      text-align: center;
+    section.alternate {
+      background-color: var(--cor-secundaria);
     }
-    .services, .differentials, .testimonials {
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      text-align: center;
+      color: var(--cor-escura);
+    }
+
+    /* Cards */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
     }
     .card {
       background: var(--cor-clara);
-      padding: 20px;
+      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       text-align: center;
       transition: transform 0.3s;
     }
-    .card:hover { transform: translateY(-5px); }
+    .card:hover {
+      transform: translateY(-10px);
+    }
     .card i {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: var(--cor-primaria);
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--cor-destaque);
     }
-    form {
-      background: var(--cor-clara);
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
-    form input, form textarea {
-      width: 100%;
-      padding: 10px;
+    .card h3 {
+      font-size: 1.5rem;
       margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      color: var(--cor-escura);
     }
-    form button {
-      background-color: var(--cor-primaria);
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
+    .card p {
+      font-size: 1rem;
+      color: var(--cor-texto-escuro);
     }
-    form button:hover { background-color: var(--cor-destaque); }
-    footer {
-      background: var(--cor-primaria);
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
+
+    /* Simulador */
     .simulador-container {
-      background-color: var(--cor-clara);
-      padding: 30px;
+      background: var(--cor-clara);
+      padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
       max-width: 600px;
       margin: auto;
       text-align: center;
     }
+    .simulador-container input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .simulador-container button {
+      background: var(--cor-destaque);
+      color: var(--cor-texto-claro);
+      border: none;
+      border-radius: 30px;
+      padding: 15px 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .simulador-container button:hover {
+      background: #0b5ed7;
+    }
     .resultado-impacto {
       font-size: 1.2rem;
       margin-top: 20px;
-      font-weight: bold;
-      color: var(--cor-primaria);
+      font-weight: 600;
+      color: var(--cor-escura);
     }
-    #sobre { background-color: var(--cor-alternada); }
-    #servicos { background-color: var(--cor-clara); }
-    #diferenciais { background-color: var(--cor-escura); }
-    #simulador { background-color: var(--cor-clara); }
-    #depoimentos { background-color: var(--cor-alternada); }
-    #contato { background-color: var(--cor-clara); }
-    @media(max-width: 768px){ header h1 { font-size: 2rem; } }
+
+    /* Formulário de contato */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    form input,
+    form textarea {
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    form button {
+      align-self: start;
+      background: var(--cor-destaque);
+      color: var(--cor-texto-claro);
+      border: none;
+      border-radius: 30px;
+      padding: 15px 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    form button:hover {
+      background: #0b5ed7;
+    }
+
+    /* Depoimentos */
+    .testimonial {
+      background: var(--cor-clara);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .testimonial p {
+      font-style: italic;
+      color: var(--cor-texto-escuro);
+    }
+    .testimonial strong {
+      color: var(--cor-escura);
+    }
+    .testimonial em {
+      color: #555;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--cor-escura);
+      color: var(--cor-texto-claro);
+      text-align: center;
+      padding: 40px 20px;
+    }
+    footer p {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      nav ul li { margin-left: 15px; }
+    }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#servicos">Serviços</a>
-    <a href="#diferenciais">Diferenciais</a>
-    <a href="#simulador">Simulador</a>
-    <a href="#depoimentos">Depoimentos</a>
-    <a href="#contato">Contato</a>
+  <!-- Navegação -->
+  <nav id="navbar">
+    <div class="logo">InfraGuard Pro</div>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#diferenciais">Diferenciais</a></li>
+      <li><a href="#simulador">Simulador</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
   </nav>
 
-  <header>
-    <h1>InfraGuard Pro</h1>
-    <p>Seus dados protegidos. Seu negócio garantido.</p>
-    <p>Backup inteligente, recuperação de desastres rápida e migração segura para a nuvem.</p>
-    <a href="#contato" class="btn">Agendar Diagnóstico Gratuito</a>
-    <a href="#contato" class="btn">Falar com um Especialista</a>
-  </header>
-
-  <section id="sobre">
-    <h2>Quem Somos</h2>
-    <p>A InfraGuard Pro protege a continuidade dos negócios através de backup inteligente, disaster recovery sob medida e migração segura para nuvem, com atendimento personalizado e foco em alta disponibilidade.</p>
+  <!-- Hero -->
+  <section class="hero" id="inicio">
+    <div class="content">
+      <h1>Proteção e Continuidade para Seu Negócio</h1>
+      <p>Backup inteligente, Disaster Recovery ágil e Migração Segura para Nuvem com a excelência InfraGuard Pro.</p>
+      <a href="#contato" class="btn">Agendar Diagnóstico</a>
+      <a href="#contato" class="btn">Falar com Especialista</a>
+    </div>
   </section>
 
-  <section id="servicos">
-    <h2>Soluções para sua tranquilidade digital</h2>
-    <div class="services">
+  <!-- Sobre -->
+  <section id="sobre">
+    <h2>Quem Somos</h2>
+    <p style="max-width: 800px; margin: auto; text-align: center;">Na InfraGuard Pro, garantimos a continuidade dos seus negócios oferecendo soluções robustas de backup, recuperação de desastres personalizadas e migração segura para ambientes em nuvem, sempre com foco em alta disponibilidade e atendimento dedicado.</p>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos" class="alternate">
+    <h2>Nossas Soluções</h2>
+    <div class="grid">
       <div class="card">
         <i class="fas fa-hdd"></i>
         <h3>Backup Gerenciado</h3>
-        <p>Backups locais e em nuvem, automáticos e seguros.</p>
+        <p>Backups automatizados, criptografados e armazenados localmente ou na nuvem.</p>
       </div>
       <div class="card">
-        <i class="fas fa-cogs"></i>
-        <h3>Disaster Recovery Sob Medida</h3>
-        <p>Planos de recuperação personalizados.</p>
+        <i class="fas fa-chart-line"></i>
+        <h3>Disaster Recovery</h3>
+        <p>Planos personalizados para retomar operações em minutos.</p>
       </div>
       <div class="card">
         <i class="fas fa-cloud-upload-alt"></i>
-        <h3>Migração Segura para a Nuvem</h3>
-        <p>Infraestrutura migrada de forma segura e escalável.</p>
+        <h3>Migração para Nuvem</h3>
+        <p>Transição segura e escalável de infraestrutura on-premisses para nuvem.</p>
       </div>
     </div>
   </section>
 
+  <!-- Diferenciais -->
   <section id="diferenciais">
-    <h2>Segurança que vai além do backup</h2>
-    <div class="differentials">
+    <h2>Por que Escolher a InfraGuard Pro</h2>
+    <div class="grid">
       <div class="card">
-        <i class="fas fa-chart-line"></i>
-        <h3>Alta Disponibilidade</h3>
-      </div>
-      <div class="card">
-        <i class="fas fa-lock"></i>
+        <i class="fas fa-shield-alt"></i>
         <h3>Segurança Total</h3>
       </div>
       <div class="card">
-        <i class="fas fa-rocket"></i>
-        <h3>Rapidez de Implementação</h3>
+        <i class="fas fa-tachometer-alt"></i>
+        <h3>Alta Performance</h3>
+      </div>
+      <div class="card">
+        <i class="fas fa-headset"></i>
+        <h3>Suporte Dedicado</h3>
       </div>
       <div class="card">
         <i class="fas fa-certificate"></i>
-        <h3>Compliance Garantido</h3>
+        <h3>Compliance & SLA</h3>
       </div>
     </div>
   </section>
 
-  <section id="simulador">
-    <h2>Quanto custa 1 hora de inatividade?</h2>
+  <!-- Simulador -->
+  <section id="simulador" class="alternate">
+    <h2>Calcule o Impacto da Inatividade</h2>
     <div class="simulador-container">
-      <input type="number" id="faturamento" placeholder="Faturamento Mensal" />
+      <input type="number" id="faturamento" placeholder="Faturamento Mensal (R$)" />
       <input type="number" id="horas" placeholder="Horas de Inatividade" />
-      <button onclick="calcularImpacto()">Calcular Impacto</button>
+      <button onclick="calcularImpacto()">Calcular</button>
       <div class="resultado-impacto" id="resultadoImpacto"></div>
     </div>
   </section>
 
+  <!-- Depoimentos -->
   <section id="depoimentos">
-    <h2>Quem já confia na InfraGuard Pro</h2>
-    <div class="testimonials">
-      <div class="card">
-        <p>"A InfraGuard Pro garantiu a continuidade do nosso negócio com soluções rápidas e eficientes. Estamos seguros!"</p>
+    <h2>Depoimentos</h2>
+    <div class="grid">
+      <div class="testimonial">
+        <p>"A InfraGuard Pro salvou nossa operação em um momento crítico. Extremamente rápidos e profissionais."</p>
         <strong>João Silva</strong>
         <em>CEO - TechCorp</em>
       </div>
-      <div class="card">
-        <p>"A migração para a nuvem foi tranquila e sem interrupções. Recomendo os serviços da InfraGuard Pro!"</p>
+      <div class="testimonial">
+        <p>"Migração transparente e sem downtime. Recomendo fortemente!"</p>
         <strong>Maria Oliveira</strong>
         <em>Diretora de TI - InovaTech</em>
       </div>
     </div>
   </section>
 
-  <section id="contato">
-    <h2>Agende seu Diagnóstico Gratuito</h2>
+  <!-- Contato -->
+  <section id="contato" class="alternate">
+    <h2>Entre em Contato</h2>
     <form action="https://formsubmit.co/contato@infraguardpro.com.br" method="POST">
       <input type="text" name="nome" placeholder="Nome" required>
       <input type="text" name="empresa" placeholder="Empresa" required>
-      <input type="text" name="cargo" placeholder="Cargo">
-      <input type="tel" name="telefone" placeholder="Telefone">
       <input type="email" name="email" placeholder="E-mail" required>
       <textarea name="mensagem" placeholder="Mensagem" rows="4"></textarea>
-      <div style="margin-bottom: 15px; text-align: left;">
-        <label>
-          <input type="checkbox" required>
-          Autorizo o tratamento dos meus dados pessoais conforme a <a href="#lgpd" style="color: var(--cor-primaria); text-decoration: underline;">LGPD</a>.
-        </label>
-      </div>
-      <button type="submit">Enviar</button>
+      <button type="submit">Enviar Mensagem</button>
     </form>
-    <div style="margin-top: 30px; text-align: center;">
-      <p><strong>Ou entre em contato diretamente:</strong></p>
-      <p><i class="fas fa-envelope"></i> contato@infraguardpro.com.br</p>
-      <p><i class="fab fa-whatsapp"></i> (11) 91234-5678</p>
-    </div>
+    <div style="margin-top: 40px; text-align: center;"><p><i class="fas fa-envelope"></i> contato@infraguardpro.com.br<br><i class="fab fa-whatsapp"></i> (11) 91234-5678</p></div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 InfraGuard Pro. Todos os direitos reservados.</p>
   </footer>
 
+  <!-- Scripts -->
   <script>
+    // Scroll nav background
+    window.addEventListener('scroll', function() {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    });
+    // Simulador
     function calcularImpacto() {
-      var faturamento = document.getElementById('faturamento').value;
-      var horas = document.getElementById('horas').value;
-      var impacto = (faturamento / 30) * (horas / 24);
-      document.getElementById('resultadoImpacto').textContent = `O impacto de ${horas} hora(s) de inatividade é: R$ ${impacto.toFixed(2)}`;
+      const faturamento = parseFloat(document.getElementById('faturamento').value) || 0;
+      const horas = parseFloat(document.getElementById('horas').value) || 0;
+      const impacto = (faturamento / 30) * (horas / 24);
+      document.getElementById('resultadoImpacto').textContent = `Impacto de ${horas}h: R$ ${impacto.toFixed(2)}`;
     }
   </script>
 </body>
