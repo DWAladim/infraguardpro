@@ -22,7 +22,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: var(--fonte-principal); background-color: var(--cor-secundaria); color: var(--cor-texto); line-height: 1.6; }
     header {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('b0abf707-3a96-43c2-95ea-7f7557b7e4eb.png') center/cover no-repeat;
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1605902711622-cfb43c4437d1') center/cover no-repeat;
       color: white;
       padding: 100px 20px;
       text-align: center;
@@ -141,6 +141,97 @@
   </style>
 </head>
 <body>
+  <nav>
+    <a href="#sobre">Sobre</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#diferenciais">Diferenciais</a>
+    <a href="#simulador">Simulador</a>
+    <a href="#depoimentos">Depoimentos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <header>
+    <h1>InfraGuard Pro</h1>
+    <p>Seus dados protegidos. Seu negócio garantido.</p>
+    <p>Backup inteligente, recuperação de desastres rápida e migração segura para a nuvem.</p>
+    <a href="#contato" class="btn">Agendar Diagnóstico Gratuito</a>
+    <a href="#contato" class="btn">Falar com um Especialista</a>
+  </header>
+
+  <section id="sobre">
+    <h2>Quem Somos</h2>
+    <p>A InfraGuard Pro protege a continuidade dos negócios através de backup inteligente, disaster recovery sob medida e migração segura para nuvem, com atendimento personalizado e foco em alta disponibilidade.</p>
+  </section>
+
+  <section id="servicos">
+    <h2>Soluções para sua tranquilidade digital</h2>
+    <div class="services">
+      <div class="card">
+        <i class="fas fa-hdd"></i>
+        <h3>Backup Gerenciado</h3>
+        <p>Backups locais e em nuvem, automáticos e seguros.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-cogs"></i>
+        <h3>Disaster Recovery Sob Medida</h3>
+        <p>Planos de recuperação personalizados.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <h3>Migração Segura para a Nuvem</h3>
+        <p>Infraestrutura migrada de forma segura e escalável.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="diferenciais">
+    <h2>Segurança que vai além do backup</h2>
+    <div class="differentials">
+      <div class="card">
+        <i class="fas fa-chart-line"></i>
+        <h3>Alta Disponibilidade</h3>
+      </div>
+      <div class="card">
+        <i class="fas fa-lock"></i>
+        <h3>Segurança Total</h3>
+      </div>
+      <div class="card">
+        <i class="fas fa-rocket"></i>
+        <h3>Rapidez de Implementação</h3>
+      </div>
+      <div class="card">
+        <i class="fas fa-certificate"></i>
+        <h3>Compliance Garantido</h3>
+      </div>
+    </div>
+  </section>
+
+  <section id="simulador">
+    <h2>Quanto custa 1 hora de inatividade?</h2>
+    <div class="simulador-container">
+      <input type="number" id="faturamento" placeholder="Faturamento Mensal" />
+      <input type="number" id="horas" placeholder="Horas de Inatividade" />
+      <button onclick="calcularImpacto()">Calcular Impacto</button>
+      <div class="resultado-impacto" id="resultadoImpacto"></div>
+    </div>
+  </section>
+
+  <section id="depoimentos">
+    <h2>Quem já confia na InfraGuard Pro</h2>
+    <div class="testimonials">
+      <div class="card">
+        <p>"A InfraGuard Pro garantiu a continuidade do nosso negócio com soluções rápidas e eficientes. Estamos seguros!"</p>
+        <strong>João Silva</strong>
+        <em>CEO - TechCorp</em>
+      </div>
+      <div class="card">
+        <p>"A migração para a nuvem foi tranquila e sem interrupções. Recomendo os serviços da InfraGuard Pro!"</p>
+        <strong>Maria Oliveira</strong>
+        <em>Diretora de TI - InovaTech</em>
+      </div>
+    </div>
+  </section>
+
   <section id="contato">
     <h2>Agende seu Diagnóstico Gratuito</h2>
     <form action="https://formsubmit.co/contato@infraguardpro.com.br" method="POST">
@@ -150,15 +241,32 @@
       <input type="tel" name="telefone" placeholder="Telefone">
       <input type="email" name="email" placeholder="E-mail" required>
       <textarea name="mensagem" placeholder="Mensagem" rows="4"></textarea>
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://infraguardpro.com.br/obrigado.html">
+      <div style="margin-bottom: 15px; text-align: left;">
+        <label>
+          <input type="checkbox" required>
+          Autorizo o tratamento dos meus dados pessoais conforme a <a href="#lgpd" style="color: var(--cor-primaria); text-decoration: underline;">LGPD</a>.
+        </label>
+      </div>
       <button type="submit">Enviar</button>
     </form>
     <div style="margin-top: 30px; text-align: center;">
       <p><strong>Ou entre em contato diretamente:</strong></p>
-      <p><i class="fas fa-envelope"></i> <a href="mailto:contato@infraguardpro.com.br" style="color: var(--cor-primaria); text-decoration: none;">contato@infraguardpro.com.br</a></p>
-      <p><i class="fab fa-whatsapp"></i> <a href="https://api.whatsapp.com/send?phone=5537999518937" target="_blank" style="color: var(--cor-primaria); text-decoration: none;">(37) 99951-8937</a></p>
+      <p><i class="fas fa-envelope"></i> contato@infraguardpro.com.br</p>
+      <p><i class="fab fa-whatsapp"></i> (11) 91234-5678</p>
     </div>
   </section>
+
+  <footer>
+    <p>&copy; 2025 InfraGuard Pro. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    function calcularImpacto() {
+      var faturamento = document.getElementById('faturamento').value;
+      var horas = document.getElementById('horas').value;
+      var impacto = (faturamento / 30) * (horas / 24);
+      document.getElementById('resultadoImpacto').textContent = `O impacto de ${horas} hora(s) de inatividade é: R$ ${impacto.toFixed(2)}`;
+    }
+  </script>
 </body>
 </html>
